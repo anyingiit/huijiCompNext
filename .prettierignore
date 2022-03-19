@@ -1,0 +1,6 @@
+# /.prettierignore
+# Ignore artifacts:
+node_modules
+dist
+.vscode
+.prettierignorep
