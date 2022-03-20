@@ -1,9 +1,33 @@
 import { useState } from 'react';
 import type { NextPage } from 'next';
+import { InferGetStaticPropsType, GetStaticProps } from 'next';
 import { MenuOutlined, SketchOutlined } from '@ant-design/icons';
 import styles from '../../../styles/home/Header/styles.module.scss';
 
-const Header: NextPage = () => {
+type pac = {
+  title: string;
+  msg: string;
+};
+
+type Props = {
+  title: string;
+  msg: string;
+};
+
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
+  const props: Props = {
+    title: 'abc',
+    msg: '123'
+  };
+  return {
+    props: {
+      ...props
+    }
+  };
+};
+
+const Header: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (props) => {
+  const test = props.msg;
   type menuDatasProp = {
     mobileMenuEnable: boolean;
     menuItems: Array<{
