@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Root.module.scss';
+import Home from './home';
 
 const Root: NextPage = () => {
   return (
