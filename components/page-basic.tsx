@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
-import Header, { HeaderProps } from './header';
+import Header from './header';
+import { HeaderProps } from '../pages/api/getHeader';
 import Footer from './footer';
 import Container from './container';
 
@@ -8,9 +9,10 @@ type Props = {
 };
 
 const PageBase: NextPage<Props> = ({ children, headerProps }) => {
+  console.log('PageBase: ', headerProps);
   return (
     <Container>
-      <Header props={headerProps.props} />
+      <Header props={headerProps} />
       {children}
       <Footer />
     </Container>

@@ -9,125 +9,8 @@ type Props = {
 };
 
 const Header: NextPage<Props> = ({ props }) => {
-  type menuDatasProp = {
-    mobileMenuEnable: boolean;
-    menuItems: Array<{
-      enable: boolean;
-      largeTitle: {
-        title: string;
-        href: string;
-        children: Array<{
-          title: string;
-          href: string;
-        }>;
-      };
-    }>;
-  };
-  const [menuDatas, setMenuItems] = useState<menuDatasProp>({
-    mobileMenuEnable: false,
-    menuItems: [
-      {
-        enable: false,
-        largeTitle: {
-          title: '主页',
-          href: '#',
-          children: [
-            {
-              title: '主页-1',
-              href: '#'
-            },
-            {
-              title: '主页-2',
-              href: '#'
-            },
-            {
-              title: '主页-3',
-              href: '#'
-            },
-            {
-              title: '主页-4',
-              href: '#'
-            }
-          ]
-        }
-      },
-      {
-        enable: false,
-        largeTitle: {
-          title: '产品',
-          href: '#',
-          children: [
-            {
-              title: '产品-1',
-              href: '#'
-            },
-            {
-              title: '产品-2',
-              href: '#'
-            },
-            {
-              title: '产品-3',
-              href: '#'
-            },
-            {
-              title: '产品-4',
-              href: '#'
-            }
-          ]
-        }
-      },
-      {
-        enable: false,
-        largeTitle: {
-          title: '服务',
-          href: '#',
-          children: [
-            {
-              title: '服务-1',
-              href: '#'
-            },
-            {
-              title: '服务-2',
-              href: '#'
-            },
-            {
-              title: '服务-3',
-              href: '#'
-            },
-            {
-              title: '服务-4',
-              href: '#'
-            }
-          ]
-        }
-      },
-      {
-        enable: false,
-        largeTitle: {
-          title: '关于',
-          href: '#',
-          children: [
-            {
-              title: '关于-1',
-              href: '#'
-            },
-            {
-              title: '关于-2',
-              href: '#'
-            },
-            {
-              title: '关于-3',
-              href: '#'
-            },
-            {
-              title: '关于-4',
-              href: '#'
-            }
-          ]
-        }
-      }
-    ]
-  });
+  // TODO: 使用let的解构还是使用useState?
+  const [menuDatas, setMenuDatas] = useState(props);
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-row items-center">
@@ -151,7 +34,7 @@ const Header: NextPage<Props> = ({ props }) => {
           onClick={() => {
             const temp = { ...menuDatas };
             temp.mobileMenuEnable = !temp.mobileMenuEnable;
-            setMenuItems(temp);
+            setMenuDatas(temp);
           }}
           className="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base md:hidden ml-auto mt-auto mb-auto"
         >
@@ -182,7 +65,7 @@ const Header: NextPage<Props> = ({ props }) => {
                             menuItem.enable = false;
                           }
                         });
-                        setMenuItems(temp);
+                        setMenuDatas(temp);
                       }}
                     >
                       {item.enable ? '-' : '+'}
@@ -196,7 +79,7 @@ const Header: NextPage<Props> = ({ props }) => {
                       `md:absolute`
                     ].join(' ')}
                   >
-                    {menuDatas.menuItems[index].largeTitle.children.map((child, childIndex) => {
+                    {menuDatas.menuItems[index].largeTitle.children?.map((child, childIndex) => {
                       return (
                         <li key={index + childIndex} className="hover:text-gray-900 text-xl">
                           <a href={child.href}>{child.title}</a>
@@ -215,4 +98,3 @@ const Header: NextPage<Props> = ({ props }) => {
 };
 
 export default Header;
-export type { Props as HeaderProps };
