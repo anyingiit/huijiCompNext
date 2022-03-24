@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ headerMenu }) => {
-  console.log('Home: ', headerMenu);
+  // console.log('Home: ', headerMenu);
   return (
     <div className={styles.container}>
       <Head>

@@ -9,7 +9,7 @@ type Props = {
 };
 
 const PageBase: NextPage<Props> = ({ children, headerProps }) => {
-  console.log('PageBase: ', headerProps);
+  // console.log('PageBase: ', headerProps);
   return (
     <Container>
       <Header props={headerProps} />

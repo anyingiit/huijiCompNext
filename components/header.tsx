@@ -9,7 +9,6 @@ type Props = {
 };
 
 const Header: NextPage<Props> = ({ props }) => {
-  // TODO: 使用let的解构还是使用useState?
   const [menuDatas, setMenuDatas] = useState(props);
   return (
     <header className="text-gray-600 body-font">
