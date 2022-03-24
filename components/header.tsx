@@ -41,11 +41,10 @@ const Header: NextPage<Props> = ({ props }) => {
           <MenuOutlined />
         </button>
         <nav
-          className={
-            String(menuDatas.mobileMenuEnable ? 'flex' : 'hidden') +
-            ' ' +
-            'ml-auto flex flex-wrap items-start text-base justify-start flex-col absolute top-20 right-1 bottom-1 left-1 bg-white md:static md:flex-row md:flex'
-          }
+          className={[
+            `${menuDatas.mobileMenuEnable ? 'flex' : 'hidden'}`,
+            `ml-auto flex flex-wrap items-start text-base justify-start flex-col absolute top-20 right-1 bottom-1 left-1 bg-white md:static md:flex-row md:flex`
+          ].join(' ')}
         >
           {menuDatas.menuItems.map((item, index) => {
             return (
@@ -76,7 +75,7 @@ const Header: NextPage<Props> = ({ props }) => {
                   </div>
                   <ul
                     className={[
-                      `${String(menuDatas.menuItems[index].enable ? 'block' : 'hidden')}`,
+                      `${menuDatas.menuItems[index].enable ? 'block' : 'hidden'}`,
                       `md:hidden`,
                       `${styles.secondMenu}`,
                       `md:absolute`
