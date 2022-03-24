@@ -56,7 +56,10 @@ const Header: NextPage<Props> = ({ props }) => {
                       {item.largeTitle.title}
                     </a>
                     <button
-                      className="hover:text-gray-900 text-xl flex justify-center items-center w-5 md:hidden"
+                      className={[
+                        `${item.largeTitle.children == null ? 'hidden' : 'block'}`,
+                        `hover:text-gray-900 text-xl flex justify-center items-center w-5 md:hidden`
+                      ].join(' ')}
                       onClick={() => {
                         const temp = { ...menuDatas };
                         temp.menuItems[index].enable = !temp.menuItems[index].enable;
