@@ -1,4 +1,18 @@
 # Source: GitHub starter workflow "Simple workflow" (MIT) — https://github.com/actions/starter-workflows/blob/main/ci/blank.yml
+#
+# Repaired by repocurator (feature 002):
+#   - the trigger branches already named `main`, this repository's default
+#     branch, so no branch drift needed fixing here.
+#   - the test job ran the starter's placeholder echo and never installed or
+#     built anything; it now installs with Yarn (the repository ships
+#     yarn.lock, not a package-lock.json), builds with `next build`, and runs
+#     a real smoke test (scripts/smoke-test.js) that starts the built app
+#     with `next start` and asserts that `/` and `/api/hello` both respond.
+#   - the lint job's "Add your project's linters below this line" placeholder
+#     was never filled in; it now runs `next lint`, which package.json
+#     already declares as the `lint` script.
+#   - Node 16 is used throughout to match the Dockerfile's `node:16-alpine`
+#     base image.
 name: CI
 
 on:
@@ -41,18 +55,36 @@ jobs:
           fi
           echo "All actions are pinned to full-length commit SHAs."
 
-      # Add your project's linters below this line.
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
 
   test:
     name: Test
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
-      # Replace the step below with your project's test command. Pin any setup
-      # action you add to a full commit SHA, like the checkout step above.
-      - name: Run tests
-        run: echo "No tests yet. Replace this step with your project's test command."
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Test
+        run: node scripts/smoke-test.js

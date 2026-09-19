@@ -1,9 +1,11 @@
 <!-- Source: Best-README-Template BLANK_README (Unlicense) — https://github.com/othneildrew/Best-README-Template -->
 <a id="readme-top"></a>
 
-# HuijiCompNext
+# huijiCompNext
 
-Huiji comp next has no README describing its purpose; its manifest (Dockerfile, next.config.js, package.json, tsconfig.json, yarn.lock) marks it as a Docker, Next.js, Node.js and TypeScript codebase, built with TypeScript.
+A Next.js and TypeScript scaffold for a Chinese company marketing site whose home page and navigation menu are rendered entirely from hard-coded mock data, with no live backend behind them.
+
+**English** · [简体中文](README.zh-CN.md)
 
 [![CI](https://github.com/anyingiit/huijiCompNext/actions/workflows/ci.yml/badge.svg)](https://github.com/anyingiit/huijiCompNext/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/anyingiit/huijiCompNext)](LICENSE)
@@ -24,7 +26,9 @@ Huiji comp next has no README describing its purpose; its manifest (Dockerfile, 
 
 ## About The Project
 
-Huiji comp next has no README describing its purpose; its manifest (Dockerfile, next.config.js, package.json, tsconfig.json, yarn.lock) marks it as a Docker, Next.js, Node.js and TypeScript codebase, built with TypeScript.
+`pages/home/index.tsx` renders the home page through `components/page-basic.tsx`, which composes a `Header`, a `Footer` and a `Container`. The header's navigation menu — Home, Product and Service, with two Service sub-items — comes entirely from the mock object hard-coded in `pages/api/getHeader.ts`; there is no live API behind it yet.
+
+`package.json` still names the project `study-nextjs-app-01`, a leftover from how it was originally scaffolded, and the `Dockerfile` packages it as a standalone Next.js server for deployment.
 
 See the [open issues](https://github.com/anyingiit/huijiCompNext/issues) for planned features and known issues.
 
@@ -32,20 +36,24 @@ See the [open issues](https://github.com/anyingiit/huijiCompNext/issues) for pla
 
 ### Prerequisites
 
-- Git
+- Node.js 16.x — the `Dockerfile` builds this project on `node:16-alpine`
+- Yarn — the repository commits `yarn.lock`, not a `package-lock.json`
 
 ### Installation
 
 ```sh
 git clone https://github.com/anyingiit/huijiCompNext.git
 cd huijiCompNext
+yarn install --frozen-lockfile
 ```
 
 ## Usage
 
 ```sh
-huijiCompNext --help
+yarn dev
 ```
+
+Then open `http://localhost:3000` to see the home page. Its navigation menu is filled in by the mock data in `pages/api/getHeader.ts` rather than by a live API, so the menu items are the same on every load.
 
 ## Contributing
 
